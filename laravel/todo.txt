@@ -1,0 +1,4 @@
+1) Add flash messages to alert-wrapper
+2) Use put patch delete instead of post method
+3) Use route without file name using sessions
+4) Use only query builder instead of eloquent?
