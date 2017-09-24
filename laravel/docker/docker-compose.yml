@@ -1,0 +1,38 @@
+version: "2"
+services:
+  openpad-web:
+    container_name: openpad-web
+    image: nginx:1.13.1
+    working_dir: /var/www
+    ports:
+      - 8080:80
+    volumes:
+      - ./vhost.conf:/etc/nginx/conf.d/default.conf
+    volumes_from:
+      - openpad-app
+    environment:
+      - TZ=America/Sao_Paulo
+  openpad-app:
+    container_name: openpad-app
+    image: openpad-app
+    build:
+      context: ./
+      dockerfile: app.dockerfile
+    working_dir: /var/www
+    volumes:
+      - ./laravel:/var/www
+    environment:
+      - TZ=America/Sao_Paulo
+      - DB_PORT=3306
+      - DB_HOST=openpad-db
+  openpad-db:
+    container_name: openpad-db
+    image: mysql:5.7.18
+    ports:
+      - "33061:3306"
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      - TZ=America/Sao_Paulo
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=openpad-db
