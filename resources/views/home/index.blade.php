@@ -1,7 +1,6 @@
 @extends('layouts/master')
 
 @section('main_content')
-
   <form method="post" action="{{ route('submit_name') }}">
 
     {{ csrf_field() }}

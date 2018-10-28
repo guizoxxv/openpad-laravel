@@ -15,7 +15,7 @@ class HomeController extends Controller
       request()->session()->forget('logged');
 
     }
-
+    
     return view('home/index');
 
   }
